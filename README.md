@@ -27,6 +27,18 @@ An agent changed five files to "turn on strict checks and speed up CI":
 
 All four problems passed CI.
 
+## Findings: the top 925 GitHub repos
+
+We ran the GitHub Actions check across the workflows of the 925 most-starred public repositories:
+
+- 102,293 `with:` inputs checked.
+- 113 inputs that the called action does not declare, in 46 repos (5%). GitHub only logs an "Unexpected input" warning for these, and the step still passes.
+  - 20 are typos of a real input, for example `cached` instead of `cache`, or `issue-lock-inactive-days` instead of `issue-inactive-days`.
+  - 23 exist only in a newer version of the action than the one the workflow pins.
+- 20 findings were re-checked by hand against the exact `action.yml` at the pinned ref, and all 20 held up.
+
+The method, numbers and scanner are in [research/actions-inputs-2026-10](research/actions-inputs-2026-10/).
+
 ## Install
 
 Copy `skills/proof-of-effect` into your agent's skills folder, for example `~/.claude/skills/proof-of-effect` for Claude Code, or the equivalent folder for Codex, Kiro or any agent that reads `SKILL.md` skills. The agent loads it when it edits configuration.

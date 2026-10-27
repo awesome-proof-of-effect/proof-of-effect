@@ -5,7 +5,7 @@ Work happens top to bottom. Bugs reported in issues and breaking changes in supp
 | # | Item | Why | Status |
 |---|---|---|---|
 | 1 | GitHub Action: `uses: awesome-proof-of-effect/proof-of-effect@v1`, which checks a PR's config changes against its base and writes the table to the job summary | Lets teams run it on every PR without an agent | todo |
-| 2 | Findings report: Action inputs that popular repositories pass but the action never declares | Shows how common silent no-ops are, with real data | in progress |
+| 2 | Findings report: Action inputs that popular repositories pass but the action never declares | Shows how common silent no-ops are, with real data | done ([report](research/actions-inputs-2026-10/)) |
 | 3 | Terminal demo (GIF) in the README | Shows the value in five seconds | todo |
 | 4 | One-command install for Claude Code, Codex, Kiro and other `SKILL.md` agents | Removes setup friction | todo |
 | 5 | Docker Compose: integration test in CI (runners have Docker) | The compose checker is still marked experimental | todo |
