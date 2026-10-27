@@ -116,6 +116,24 @@ def load_action_meta(ctx: Context, uses: str) -> Tuple[Optional[ActionMeta], str
     return None, "could not fetch its metadata" + (f" ({errors[0]})" if errors else "")
 
 
+def closest_input(meta: ActionMeta, key: str) -> Optional[str]:
+    """The declared input a misspelled key most likely meant (fetch_depth -> fetch-depth)."""
+    wanted = sd.norm(key)
+    for name in meta.inputs:
+        if sd.norm(name) == wanted:
+            return name
+    close = difflib.get_close_matches(key.lower(), list(meta.inputs), n=1, cutoff=0.75)
+    return close[0] if close else None
+
+
+def unknown_input_evidence(meta: ActionMeta, key: str) -> str:
+    guess = closest_input(meta, key)
+    hint = f" (did you mean `{guess}`?)" if guess else ""
+    known = ", ".join(sorted(meta.inputs)[:8]) or "none"
+    return (f"{meta.source} declares no input `{key}`{hint}. GitHub only warns \"Unexpected input\", and the "
+            f"action ignores the value unless its code reads undeclared inputs. Declared: {known}")
+
+
 def _uses_sites(doc: dict) -> Iterator[Tuple[Tuple, str, dict]]:
     jobs = doc.get("jobs") or {}
     if not isinstance(jobs, dict):
@@ -168,10 +186,8 @@ def check_workflows(ctx: Context, changed: Sequence[ChangedFile]) -> List[Findin
                                             f"declared input of {meta.source}"
                                             + (f"; deprecated: {first_line(note)}" if note else ""), change=kind))
                 else:
-                    known = ", ".join(sorted(meta.inputs)[:8]) or "none"
                     findings.append(Finding(Verdict.UNKNOWN_KEY, "gha", cf.path, subject,
-                                            f"{meta.source} has no input `{key}` (inputs: {known}); GitHub only "
-                                            "warns \"Unexpected input\" and runs the step without it", change=kind))
+                                            unknown_input_evidence(meta, str(key)), change=kind))
     return findings
 
 

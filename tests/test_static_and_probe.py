@@ -47,6 +47,7 @@ def test_local_action_unknown_input(repo):
     code, found = repo.check("--only", "gha", "--offline")
     wf = ".github/workflows/ci.yml"
     assert found[(wf, "jobs.build.steps[0].with.node-versio")]["verdict"] == "UNKNOWN-KEY"
+    assert "did you mean `node-version`" in found[(wf, "jobs.build.steps[0].with.node-versio")]["evidence"]
     assert found[(wf, "jobs.build.steps[0].with.cache")]["verdict"] == "EXISTS"
     assert "deprecated" in found[(wf, "jobs.build.steps[0].with.cache")]["evidence"]
     assert (wf, "jobs.build.steps[0].with.node-version") not in found  # unchanged
@@ -187,6 +188,13 @@ def test_cli_flags(repo):
     assert found[("package.json", "faketool --alpha")]["verdict"] == "EXISTS"  # new in the fmt script
     assert not any(subject.startswith("unknowntool") for _, subject in found)
     assert code == 1
+
+
+def test_closest_input():
+    meta = static_checks.ActionMeta("actions/checkout/action.yml@v4", {"fetch-depth": None, "ref": None, "token": None})
+    assert static_checks.closest_input(meta, "fetch_depth") == "fetch-depth"
+    assert static_checks.closest_input(meta, "fetch-dept") == "fetch-depth"
+    assert static_checks.closest_input(meta, "submodules") is None
 
 
 def test_command_parsing():
