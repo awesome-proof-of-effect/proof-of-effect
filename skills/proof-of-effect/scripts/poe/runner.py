@@ -90,6 +90,7 @@ class Context:
     env_files: List[str] = field(default_factory=list)
     allow_cli: Set[str] = field(default_factory=set)
     offline: bool = False
+    audit_all: bool = False  # --all: treat every file as new, so everything already there is checked
     _base_cache: Dict[str, Optional[bytes]] = field(default_factory=dict)
     _files: Optional[List[str]] = None
 
@@ -107,6 +108,8 @@ class Context:
         return os.path.relpath(os.path.abspath(path), self.root)
 
     def base_bytes(self, rel: str) -> Optional[bytes]:
+        if self.audit_all:
+            return None
         if rel not in self._base_cache:
             self._base_cache[rel] = gitio.show(self.root, self.base, rel)
         return self._base_cache[rel]

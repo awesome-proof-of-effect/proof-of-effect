@@ -33,6 +33,9 @@ def _parser() -> argparse.ArgumentParser:
     c.add_argument("--allow-cli", action="append", default=[], metavar="NAME",
                    help="also read `NAME --help` to check NAME's flags; repeatable")
     c.add_argument("--offline", action="store_true", help="do not fetch GitHub Action metadata")
+    c.add_argument("--all", action="store_true", dest="audit_all",
+                   help="audit what is already in the repo, not just changes: every workflow input, env var "
+                        "and script flag (static checks only; before/after tool runs need a change)")
     c.add_argument("--no-swap", action="store_true", help="never touch files: skip the before/after tool runs")
     c.add_argument("--timeout", type=float, default=120, help="seconds per tool run (default 120)")
     c.add_argument("--json", action="store_true", help="print JSON instead of Markdown")
@@ -71,12 +74,17 @@ def _check(args) -> int:
               f"choose from {', '.join(CHECKERS)}", file=sys.stderr)
         return EXIT_ERROR
     ctx = Context.create(args.repo, args.base, timeout=args.timeout, tools=tools,
-                         allow_cli=set(args.allow_cli), offline=args.offline)
+                         allow_cli=set(args.allow_cli), offline=args.offline, audit_all=args.audit_all)
     ctx.samples = [ctx.rel(s) for s in args.sample]
     ctx.env_files = [ctx.rel(e) for e in args.env_file]
-    changed = gitio.changed_files(ctx.root, ctx.base)
-    items, findings = engine.plan(ctx, changed, only=only or None, run_tools=not args.no_swap)
-    findings += engine.execute(ctx, items)
+    findings = []
+    if args.audit_all:
+        ctx.base_label = "an empty repo (--all audit)"
+        changed = [gitio.ChangedFile(p, "A") for p in ctx.files()]
+    else:
+        changed = gitio.changed_files(ctx.root, ctx.base)
+        items, findings = engine.plan(ctx, changed, only=only or None, run_tools=not args.no_swap)
+        findings += engine.execute(ctx, items)
     if not only or "gha" in only:
         findings += static_checks.check_workflows(ctx, changed)
     if not only or "env" in only:

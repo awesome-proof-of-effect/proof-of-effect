@@ -20,6 +20,7 @@ A config "fix" can be valid JSON or YAML, pass CI and look right in review, and 
 ```bash
 python3 SKILL_DIR/scripts/poe.py check                     # working tree vs HEAD
 python3 SKILL_DIR/scripts/poe.py check --base origin/main  # everything on this branch
+python3 SKILL_DIR/scripts/poe.py check --all               # audit what is already there (Action inputs, env vars, script flags)
 ```
 
 It needs Python 3.9+ and git. PyYAML enables the workflow checks. Exit code 1 means at least one change does not take effect. Add `--json` for machine-readable output.
