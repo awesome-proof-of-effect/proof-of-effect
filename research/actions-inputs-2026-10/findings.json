@@ -1,0 +1,1132 @@
+[
+  {
+    "repo": "tt-a1i/archify",
+    "stars": 90103,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.website.steps[10]",
+    "uses": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+    "input": "include-hidden-files",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "tt-a1i/archify",
+    "stars": 90103,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.website.steps[11]",
+    "uses": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+    "input": "include-hidden-files",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "doocs/advanced-java",
+    "stars": 79161,
+    "workflow": ".github/workflows/compress.yml",
+    "step": "jobs.compress.steps[1]",
+    "uses": "calibreapp/image-actions@1.5.0",
+    "input": "githubToken",
+    "class": "typo",
+    "closest": "github_token"
+  },
+  {
+    "repo": "AppFlowy-IO/AppFlowy",
+    "stars": 77805,
+    "workflow": ".github/workflows/flutter_ci.yaml",
+    "step": "jobs.prepare-windows.steps[1]",
+    "uses": "./.github/actions/flutter_build",
+    "input": "DISABLE_CI_TEST_LOG",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "grafana/grafana",
+    "stars": 77543,
+    "workflow": ".github/workflows/documentation-ci.yml",
+    "step": "jobs.vale.steps[1]",
+    "uses": "grafana/writers-toolkit/vale-action@vale-action/v2",
+    "input": "token",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "grafana/grafana",
+    "stars": 77543,
+    "workflow": ".github/workflows/migrate-prs.yml",
+    "step": "jobs.main.steps[1]",
+    "uses": "grafana/grafana-github-actions-go/migrate-open-prs@main",
+    "input": "binary_release_tag",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "grafana/grafana",
+    "stars": 77543,
+    "workflow": ".github/workflows/pr-build-grafana.yml",
+    "step": "jobs.push-docker-image.steps[0]",
+    "uses": "grafana/shared-workflows/actions/login-to-gar@main",
+    "input": "environment",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "apache/superset",
+    "stars": 75327,
+    "workflow": ".github/workflows/superset-extensions-cli.yml",
+    "step": "jobs.test-superset-extensions-cli-package.steps[4]",
+    "uses": "codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "input": "file",
+    "class": "typo",
+    "closest": "files"
+  },
+  {
+    "repo": "cline/cline",
+    "stars": 70910,
+    "workflow": ".github/workflows/desktop-publish.yml",
+    "step": "jobs.release.steps[6]",
+    "uses": "softprops/action-gh-release@v1",
+    "input": "make_latest",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openinterpreter/openinterpreter",
+    "stars": 68693,
+    "workflow": ".github/workflows/rust-ci-full.yml",
+    "step": "jobs.argument_comment_lint_package.steps[2]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openinterpreter/openinterpreter",
+    "stars": 68693,
+    "workflow": ".github/workflows/rust-release-argument-comment-lint.yml",
+    "step": "jobs.build.steps[1]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openinterpreter/openinterpreter",
+    "stars": 68693,
+    "workflow": ".github/workflows/rusty-v8-release.yml",
+    "step": "jobs.build.steps[3]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openinterpreter/openinterpreter",
+    "stars": 68693,
+    "workflow": ".github/workflows/rusty-v8-release.yml",
+    "step": "jobs.build-windows-source.steps[4]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openinterpreter/openinterpreter",
+    "stars": 68693,
+    "workflow": ".github/workflows/v8-canary.yml",
+    "step": "jobs.build.steps[3]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openinterpreter/openinterpreter",
+    "stars": 68693,
+    "workflow": ".github/workflows/v8-canary.yml",
+    "step": "jobs.build-windows-source.steps[5]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[16]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[18]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[20]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[22]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[24]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[26]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.tests.steps[28]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "warpdotdev/warp",
+    "stars": 65721,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.remote-server-tests.steps[10]",
+    "uses": "trunk-io/analytics-uploader@14c0f18990953eecd01c9c5afe3cc63a73b6c371",
+    "input": "tags",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "minio/minio",
+    "stars": 61300,
+    "workflow": ".github/workflows/vulncheck.yml",
+    "step": "jobs.vulncheck.steps[1]",
+    "uses": "actions/setup-go@v5",
+    "input": "cached",
+    "class": "typo",
+    "closest": "cache"
+  },
+  {
+    "repo": "psf/requests",
+    "stars": 54728,
+    "workflow": ".github/workflows/lock-issues.yml",
+    "step": "jobs.action.steps[0]",
+    "uses": "dessant/lock-threads@89ae32b08ed1a541efecbab17912962a5e38981c",
+    "input": "issue-lock-inactive-days",
+    "class": "typo",
+    "closest": "issue-inactive-days"
+  },
+  {
+    "repo": "psf/requests",
+    "stars": 54728,
+    "workflow": ".github/workflows/lock-issues.yml",
+    "step": "jobs.action.steps[0]",
+    "uses": "dessant/lock-threads@89ae32b08ed1a541efecbab17912962a5e38981c",
+    "input": "pr-lock-inactive-days",
+    "class": "typo",
+    "closest": "pr-inactive-days"
+  },
+  {
+    "repo": "jesseduffield/lazydocker",
+    "stars": 53212,
+    "workflow": ".github/workflows/cd.yml",
+    "step": "jobs.goreleaser.steps[3]",
+    "uses": "goreleaser/goreleaser-action@v1",
+    "input": "distribution",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "expo/expo",
+    "stars": 53108,
+    "workflow": ".github/workflows/issue-opened.yml",
+    "step": "jobs.check-if-trusted.steps[0]",
+    "uses": "./.github/actions/slack-notify",
+    "input": "text",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "metabase/metabase",
+    "stars": 49867,
+    "workflow": ".github/workflows/codespell.yml",
+    "step": "jobs.codespell.steps[7]",
+    "uses": "anthropics/claude-code-action@787c5a0ce96a9a6cfb050ea0c8f4c05f2447c251",
+    "input": "prompt_file",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "ReactiveX/RxJava",
+    "stars": 48160,
+    "workflow": ".github/workflows/discord-release-announce.yml",
+    "step": "jobs.notify-discord.steps[0]",
+    "uses": "SethCohen/github-releases-to-discord@24d166886aee4646d448c8a389ff9e1ebcab3682",
+    "input": "embed_color",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "ReactiveX/RxJava",
+    "stars": 48160,
+    "workflow": ".github/workflows/discord-release-announce.yml",
+    "step": "jobs.notify-discord.steps[0]",
+    "uses": "SethCohen/github-releases-to-discord@24d166886aee4646d448c8a389ff9e1ebcab3682",
+    "input": "include_assets",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "DIYgod/RSSHub",
+    "stars": 46682,
+    "workflow": ".github/workflows/dependabot-fork.yml",
+    "step": "jobs.dependabot-fork.steps[1]",
+    "uses": "thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b",
+    "input": "GITHUB_TOKEN",
+    "class": "typo",
+    "closest": "github-token"
+  },
+  {
+    "repo": "DIYgod/RSSHub",
+    "stars": 46682,
+    "workflow": ".github/workflows/docker-test-cont.yml",
+    "step": "jobs.test-route.steps[6]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "repo",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "DIYgod/RSSHub",
+    "stars": 46682,
+    "workflow": ".github/workflows/docker-test-cont.yml",
+    "step": "jobs.test-route.steps[6]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "number",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "DIYgod/RSSHub",
+    "stars": 46682,
+    "workflow": ".github/workflows/issue-command.yml",
+    "step": "jobs.test-on-demand.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "repo",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "DIYgod/RSSHub",
+    "stars": 46682,
+    "workflow": ".github/workflows/issue-command.yml",
+    "step": "jobs.test-on-demand.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "number",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "milvus-io/milvus",
+    "stars": 46494,
+    "workflow": ".github/workflows/rerun-failure-checks.yaml",
+    "step": "jobs.rerun-checks.steps[3]",
+    "uses": "zymap/bot@master",
+    "input": "comment",
+    "class": "typo",
+    "closest": "comments"
+  },
+  {
+    "repo": "charmbracelet/bubbletea",
+    "stars": 45523,
+    "workflow": ".github/workflows/coverage.yml",
+    "step": "jobs.coverage.steps[3]",
+    "uses": "codecov/codecov-action@v6",
+    "input": "file",
+    "class": "typo",
+    "closest": "files"
+  },
+  {
+    "repo": "zen-browser/desktop",
+    "stars": 45345,
+    "workflow": ".github/workflows/build.yml",
+    "step": "jobs.release-flatpak.steps[10]",
+    "uses": "peter-evans/create-pull-request@v7",
+    "input": "git-token",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "zen-browser/desktop",
+    "stars": 45345,
+    "workflow": ".github/workflows/sync-external-patches.yml",
+    "step": "jobs.check_candidates.steps[10]",
+    "uses": "peter-evans/create-pull-request@v7",
+    "input": "git-token",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "zen-browser/desktop",
+    "stars": 45345,
+    "workflow": ".github/workflows/sync-upstream.yml",
+    "step": "jobs.check_candidates.steps[15]",
+    "uses": "peter-evans/create-pull-request@v7",
+    "input": "git-token",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "meteor/meteor",
+    "stars": 44795,
+    "workflow": ".github/workflows/test-packages.yml",
+    "step": "jobs.test-packages.steps[1]",
+    "uses": "actions/setup-node@v4",
+    "input": "submodules",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "ccxt/ccxt",
+    "stars": 44591,
+    "workflow": ".github/workflows/release-short.yml",
+    "step": "jobs.manual-job.steps[6]",
+    "uses": "actions/setup-dotnet@v5",
+    "input": "run",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "ccxt/ccxt",
+    "stars": 44591,
+    "workflow": ".github/workflows/release.yml",
+    "step": "jobs.manual-job.steps[5]",
+    "uses": "actions/setup-dotnet@v5",
+    "input": "run",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "AstrBotDevs/AstrBot",
+    "stars": 44022,
+    "workflow": ".github/workflows/docker-image.yml",
+    "step": "jobs.build-nightly-image.steps[0]",
+    "uses": "actions/checkout@v7",
+    "input": "fetch-tag",
+    "class": "typo",
+    "closest": "fetch-tags"
+  },
+  {
+    "repo": "AstrBotDevs/AstrBot",
+    "stars": 44022,
+    "workflow": ".github/workflows/docker-image.yml",
+    "step": "jobs.build-release-image.steps[0]",
+    "uses": "actions/checkout@v7",
+    "input": "fetch-tag",
+    "class": "typo",
+    "closest": "fetch-tags"
+  },
+  {
+    "repo": "outline/outline",
+    "stars": 41079,
+    "workflow": ".github/workflows/calibreapp-image-actions.yml",
+    "step": "jobs.build.steps[1]",
+    "uses": "calibreapp/image-actions@3d5873ac3e7bf1a38b24d9778d8dc639d5706d8b",
+    "input": "githubToken",
+    "class": "typo",
+    "closest": "github_token"
+  },
+  {
+    "repo": "frappe/erpnext",
+    "stars": 40652,
+    "workflow": ".github/workflows/initiate_release.yml",
+    "step": "jobs.stable-release.steps[1]",
+    "uses": "octokit/request-action@v2.x",
+    "input": "owner",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "frappe/erpnext",
+    "stars": 40652,
+    "workflow": ".github/workflows/initiate_release.yml",
+    "step": "jobs.stable-release.steps[1]",
+    "uses": "octokit/request-action@v2.x",
+    "input": "repo",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "frappe/erpnext",
+    "stars": 40652,
+    "workflow": ".github/workflows/initiate_release.yml",
+    "step": "jobs.stable-release.steps[1]",
+    "uses": "octokit/request-action@v2.x",
+    "input": "title",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "frappe/erpnext",
+    "stars": 40652,
+    "workflow": ".github/workflows/initiate_release.yml",
+    "step": "jobs.stable-release.steps[1]",
+    "uses": "octokit/request-action@v2.x",
+    "input": "body",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "frappe/erpnext",
+    "stars": 40652,
+    "workflow": ".github/workflows/initiate_release.yml",
+    "step": "jobs.stable-release.steps[1]",
+    "uses": "octokit/request-action@v2.x",
+    "input": "base",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "frappe/erpnext",
+    "stars": 40652,
+    "workflow": ".github/workflows/initiate_release.yml",
+    "step": "jobs.stable-release.steps[1]",
+    "uses": "octokit/request-action@v2.x",
+    "input": "head",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "phaserjs/phaser",
+    "stars": 40572,
+    "workflow": ".github/workflows/lock-comments.yml",
+    "step": "jobs.action.steps[0]",
+    "uses": "dessant/lock-threads@v5",
+    "input": "owner",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Kong/insomnia",
+    "stars": 40081,
+    "workflow": ".github/workflows/homebrew.yml",
+    "step": "jobs.update_homebrew.steps[1]",
+    "uses": "Homebrew/actions/setup-homebrew@6eaeff80e7e5c43087c0e5eb5aa82120399e9c91",
+    "input": "test-bot",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "mattermost/mattermost",
+    "stars": 39449,
+    "workflow": ".github/workflows/claude.yml",
+    "step": "jobs.claude.steps[1]",
+    "uses": "anthropics/claude-code-action@26ec041249acb0a944c0a47b6c0c13f05dbc5b44",
+    "input": "model",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "mattermost/mattermost",
+    "stars": 39449,
+    "workflow": ".github/workflows/claude.yml",
+    "step": "jobs.claude.steps[1]",
+    "uses": "anthropics/claude-code-action@26ec041249acb0a944c0a47b6c0c13f05dbc5b44",
+    "input": "allowed_tools",
+    "class": "typo",
+    "closest": "allowed_bots"
+  },
+  {
+    "repo": "preactjs/preact",
+    "stars": 38958,
+    "workflow": ".github/workflows/single-bench.yml",
+    "step": "jobs.build_base",
+    "uses": "./.github/workflows/ci.yml",
+    "input": "ref",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "preactjs/preact",
+    "stars": 38958,
+    "workflow": ".github/workflows/single-bench.yml",
+    "step": "jobs.build_base",
+    "uses": "./.github/workflows/ci.yml",
+    "input": "artifact_name",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "gitroomhq/postiz-app",
+    "stars": 38778,
+    "workflow": ".github/workflows/stale.yml",
+    "step": "jobs.close-issues.steps[0]",
+    "uses": "actions/stale@v9",
+    "input": "exempt-pr-label",
+    "class": "typo",
+    "closest": "exempt-pr-labels"
+  },
+  {
+    "repo": "aquasecurity/trivy",
+    "stars": 38761,
+    "workflow": ".github/workflows/publish-chart.yaml",
+    "step": "jobs.test-chart.steps[4]",
+    "uses": "helm/kind-action@06c1ae10762d3b9c1644e7fe69596ae519e015a2",
+    "input": "image",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "dotnet/aspnetcore",
+    "stars": 38498,
+    "workflow": ".github/workflows/update-jquery-validate.yml",
+    "step": "jobs.update-jquery-validate.steps[5]",
+    "uses": "dotnet/actions-create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04",
+    "input": "paths",
+    "class": "typo",
+    "closest": "path"
+  },
+  {
+    "repo": "chatwoot/chatwoot",
+    "stars": 38386,
+    "workflow": ".github/workflows/run_foss_spec.yml",
+    "step": "jobs.backend-tests.steps[1]",
+    "uses": "pnpm/action-setup@v4",
+    "input": "ref",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "chatwoot/chatwoot",
+    "stars": 38386,
+    "workflow": ".github/workflows/run_foss_spec.yml",
+    "step": "jobs.backend-tests.steps[1]",
+    "uses": "pnpm/action-setup@v4",
+    "input": "repository",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/citgm.yml",
+    "step": "jobs.remove-label.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "repo",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/citgm.yml",
+    "step": "jobs.remove-label.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "issue_number",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/citgm.yml",
+    "step": "jobs.remove-label.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "name",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/missing_types.yml",
+    "step": "jobs.create_issue.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "owner",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/missing_types.yml",
+    "step": "jobs.create_issue.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "repo",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/missing_types.yml",
+    "step": "jobs.create_issue.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "title",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/missing_types.yml",
+    "step": "jobs.create_issue.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "body",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "fastify/fastify",
+    "stars": 37306,
+    "workflow": ".github/workflows/missing_types.yml",
+    "step": "jobs.create_issue.steps[0]",
+    "uses": "octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae",
+    "input": "labels",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "doocs/leetcode",
+    "stars": 36727,
+    "workflow": ".github/workflows/compress-images.yml",
+    "step": "jobs.compress.steps[1]",
+    "uses": "calibreapp/image-actions@9d037c06280028c110ff61c433ad4dc7d33c3c43",
+    "input": "githubToken",
+    "class": "typo",
+    "closest": "github_token"
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[1]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[2]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[3]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[4]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[5]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[6]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "Fincept-Corporation/FinceptTerminal",
+    "stars": 33176,
+    "workflow": ".github/workflows/translate-readme.yml",
+    "step": "jobs.translate.steps[7]",
+    "uses": "dephraiim/translate-readme@main",
+    "input": "COMMIT",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "barry-ran/QtScrcpy",
+    "stars": 32588,
+    "workflow": ".github/workflows/macos.yml",
+    "step": "jobs.build.steps[1]",
+    "uses": "jurplel/install-qt-action@v4.1.1",
+    "input": "cached",
+    "class": "typo",
+    "closest": "cache"
+  },
+  {
+    "repo": "barry-ran/QtScrcpy",
+    "stars": 32588,
+    "workflow": ".github/workflows/macos.yml",
+    "step": "jobs.build.steps[2]",
+    "uses": "jurplel/install-qt-action@v4.1.1",
+    "input": "cached",
+    "class": "typo",
+    "closest": "cache"
+  },
+  {
+    "repo": "barry-ran/QtScrcpy",
+    "stars": 32588,
+    "workflow": ".github/workflows/windows.yml",
+    "step": "jobs.build.steps[1]",
+    "uses": "jurplel/install-qt-action@v4.1.1",
+    "input": "cached",
+    "class": "typo",
+    "closest": "cache"
+  },
+  {
+    "repo": "grafana/k6",
+    "stars": 32060,
+    "workflow": ".github/workflows/build.yml",
+    "step": "jobs.sign-binaries.steps[3]",
+    "uses": "grafana/shared-workflows/actions/get-vault-secrets@2f1ddaf3ce1aa677356243d0dd584be33cfa35e3",
+    "input": "export_env",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "grafana/k6",
+    "stars": 32060,
+    "workflow": ".github/workflows/build.yml",
+    "step": "jobs.sign-packages.steps[1]",
+    "uses": "grafana/shared-workflows/actions/get-vault-secrets@2f1ddaf3ce1aa677356243d0dd584be33cfa35e3",
+    "input": "export_env",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "grafana/k6",
+    "stars": 32060,
+    "workflow": ".github/workflows/build.yml",
+    "step": "jobs.submit-winget-manifest.steps[1]",
+    "uses": "grafana/shared-workflows/actions/get-vault-secrets@2f1ddaf3ce1aa677356243d0dd584be33cfa35e3",
+    "input": "export_env",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "grafana/k6",
+    "stars": 32060,
+    "workflow": ".github/workflows/build.yml",
+    "step": "jobs.publish-packages.steps[4]",
+    "uses": "grafana/shared-workflows/actions/get-vault-secrets@2f1ddaf3ce1aa677356243d0dd584be33cfa35e3",
+    "input": "export_env",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "emilk/egui",
+    "stars": 31801,
+    "workflow": ".github/workflows/cargo_shear.yml",
+    "step": "jobs.cargo-shear.steps[1]",
+    "uses": "taiki-e/install-action@v2.48.7",
+    "input": "tool",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "emilk/egui",
+    "stars": 31801,
+    "workflow": ".github/workflows/taplo.yml",
+    "step": "jobs.taplo.steps[1]",
+    "uses": "taiki-e/install-action@v2.48.7",
+    "input": "tool",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "Lightning-AI/pytorch-lightning",
+    "stars": 31432,
+    "workflow": ".github/workflows/ci-tests-fabric.yml",
+    "step": "jobs.fabric-cpu.steps[14]",
+    "uses": "codecov/codecov-action@e79a6962e0d4c0c17b229090214935d2e33f8354",
+    "input": "file",
+    "class": "typo",
+    "closest": "files"
+  },
+  {
+    "repo": "Lightning-AI/pytorch-lightning",
+    "stars": 31432,
+    "workflow": ".github/workflows/ci-tests-pytorch.yml",
+    "step": "jobs.pl-cpu.steps[20]",
+    "uses": "codecov/codecov-action@e79a6962e0d4c0c17b229090214935d2e33f8354",
+    "input": "file",
+    "class": "typo",
+    "closest": "files"
+  },
+  {
+    "repo": "flameshot-org/flameshot",
+    "stars": 31339,
+    "workflow": ".github/workflows/Windows-pack.yml",
+    "step": "jobs.windows-pack.steps[5]",
+    "uses": "lukka/run-vcpkg@v11",
+    "input": "vcpkgArguments",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "flameshot-org/flameshot",
+    "stars": 31339,
+    "workflow": ".github/workflows/Windows-pack.yml",
+    "step": "jobs.windows-pack.steps[5]",
+    "uses": "lukka/run-vcpkg@v11",
+    "input": "appendedCacheKey",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "flameshot-org/flameshot",
+    "stars": 31339,
+    "workflow": ".github/workflows/Windows-pack.yml",
+    "step": "jobs.windows-pack.steps[5]",
+    "uses": "lukka/run-vcpkg@v11",
+    "input": "vcpkgTriplet",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "farion1231/cc-switch",
+    "stars": 149212,
+    "workflow": ".github/workflows/stale.yml",
+    "step": "jobs.stale.steps[0]",
+    "uses": "actions/stale@v10",
+    "input": "exempt-issue-created-after",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rust-ci-full-nextest-platform.yml",
+    "step": "jobs.archive.steps[7]",
+    "uses": "taiki-e/install-action@44c6d64aa62cd779e873306675c7a58e86d6d532",
+    "input": "version",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rust-ci-full-nextest-platform.yml",
+    "step": "jobs.archive.steps[11]",
+    "uses": "taiki-e/install-action@44c6d64aa62cd779e873306675c7a58e86d6d532",
+    "input": "version",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rust-ci-full-nextest-platform.yml",
+    "step": "jobs.shard.steps[4]",
+    "uses": "taiki-e/install-action@44c6d64aa62cd779e873306675c7a58e86d6d532",
+    "input": "version",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rust-ci-full.yml",
+    "step": "jobs.lint_build.steps[7]",
+    "uses": "taiki-e/install-action@44c6d64aa62cd779e873306675c7a58e86d6d532",
+    "input": "version",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rust-ci-full.yml",
+    "step": "jobs.lint_build.steps[16]",
+    "uses": "taiki-e/install-action@44c6d64aa62cd779e873306675c7a58e86d6d532",
+    "input": "version",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rusty-v8-release.yml",
+    "step": "jobs.build.steps[3]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/rusty-v8-release.yml",
+    "step": "jobs.build-windows-source.steps[5]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/v8-canary.yml",
+    "step": "jobs.build.steps[3]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "openai/codex",
+    "stars": 131103,
+    "workflow": ".github/workflows/v8-canary.yml",
+    "step": "jobs.build-windows-source.steps[6]",
+    "uses": "dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582",
+    "input": "toolchain",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "google-gemini/gemini-cli",
+    "stars": 108563,
+    "workflow": ".github/workflows/community-report.yml",
+    "step": "jobs.generate-report.steps[0]",
+    "uses": "actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b",
+    "input": "permission-discussions",
+    "class": "newer-version-only",
+    "closest": "permission-team-discussions"
+  },
+  {
+    "repo": "google-gemini/gemini-cli",
+    "stars": 108563,
+    "workflow": ".github/workflows/community-report.yml",
+    "step": "jobs.generate-report.steps[2]",
+    "uses": "google-github-actions/run-gemini-cli@a3bf79042542528e91937b3a3a6fbc4967ee3c31",
+    "input": "upload_artifacts",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "google-gemini/gemini-cli",
+    "stars": 108563,
+    "workflow": ".github/workflows/docs-audit.yml",
+    "step": "jobs.audit-docs.steps[2]",
+    "uses": "google-github-actions/run-gemini-cli@a3bf79042542528e91937b3a3a6fbc4967ee3c31",
+    "input": "upload_artifacts",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "google-gemini/gemini-cli",
+    "stars": 108563,
+    "workflow": ".github/workflows/release-notes.yml",
+    "step": "jobs.generate-release-notes.steps[4]",
+    "uses": "google-github-actions/run-gemini-cli@a3bf79042542528e91937b3a3a6fbc4967ee3c31",
+    "input": "upload_artifacts",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "thedotmack/claude-mem",
+    "stars": 103540,
+    "workflow": ".github/workflows/ci.yml",
+    "step": "jobs.chroma-recycle-gate.steps[3]",
+    "uses": "astral-sh/setup-uv@v5",
+    "input": "cache-python",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "thedotmack/claude-mem",
+    "stars": 103540,
+    "workflow": ".github/workflows/windows.yml",
+    "step": "jobs.chroma-windows.steps[3]",
+    "uses": "astral-sh/setup-uv@v5",
+    "input": "cache-python",
+    "class": "newer-version-only",
+    "closest": null
+  },
+  {
+    "repo": "microsoft/Web-Dev-For-Beginners",
+    "stars": 97022,
+    "workflow": ".github/workflows/daily-repo-status.lock.yml",
+    "step": "jobs.agent.steps[1]",
+    "uses": "actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8",
+    "input": "depth",
+    "class": "removed",
+    "closest": null
+  },
+  {
+    "repo": "zed-industries/zed",
+    "stars": 92272,
+    "workflow": ".github/workflows/comment_on_potential_duplicate_issues.yml",
+    "step": "jobs.identify-duplicates.steps[1]",
+    "uses": "actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859",
+    "input": "permission-discussions",
+    "class": "newer-version-only",
+    "closest": "permission-team-discussions"
+  },
+  {
+    "repo": "mermaid-js/mermaid",
+    "stars": 90888,
+    "workflow": ".github/workflows/pr-labeled.yml",
+    "step": "jobs.e2e_full_argos",
+    "uses": "./.github/workflows/e2e.yml",
+    "input": "group_argos_images",
+    "class": "removed",
+    "closest": null
+  }
+]
