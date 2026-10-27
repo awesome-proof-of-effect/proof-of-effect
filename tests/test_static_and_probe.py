@@ -54,6 +54,30 @@ def test_local_action_unknown_input(repo):
     assert code == 1
 
 
+def test_all_mode_audits_existing_workflows(repo):
+    repo.write(".github/actions/setup/action.yml", ACTION)
+    repo.write(".github/workflows/ci.yml", """
+        on: push
+        jobs:
+          build:
+            runs-on: ubuntu-latest
+            steps:
+              - uses: ./.github/actions/setup
+                with:
+                  node-version: 20
+                  cached: true
+    """)
+    repo.commit()
+    code, found = repo.check("--all", "--only", "gha", "--offline")
+    wf = ".github/workflows/ci.yml"
+    assert found[(wf, "jobs.build.steps[0].with.cached")]["verdict"] == "UNKNOWN-KEY"
+    assert "did you mean `cache`" in found[(wf, "jobs.build.steps[0].with.cached")]["evidence"]
+    assert found[(wf, "jobs.build.steps[0].with.node-version")]["verdict"] == "EXISTS"
+    assert code == 1
+    code, found = repo.check("--only", "gha", "--offline")  # without --all nothing changed, nothing to report
+    assert code == 0 and not found
+
+
 def test_local_reusable_workflow_inputs(repo):
     repo.write(".github/workflows/reuse.yml", """
         on:

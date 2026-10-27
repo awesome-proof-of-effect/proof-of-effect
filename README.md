@@ -48,6 +48,7 @@ The checker also works on its own:
 ```bash
 python3 skills/proof-of-effect/scripts/poe.py check                     # working tree vs HEAD
 python3 skills/proof-of-effect/scripts/poe.py check --base origin/main  # a whole branch
+python3 skills/proof-of-effect/scripts/poe.py check --all               # audit existing Action inputs, env vars and script flags
 python3 skills/proof-of-effect/scripts/poe.py probe --files app.yaml -- python -m app --print-config
 ```
 
