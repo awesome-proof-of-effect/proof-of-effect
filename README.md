@@ -35,7 +35,7 @@ We ran the GitHub Actions check across the workflows of the 925 most-starred pub
 - 113 inputs that the called action does not declare, in 46 repos (5%). GitHub only logs an "Unexpected input" warning for these, and the step still passes.
   - 20 are typos of a real input, for example `cached` instead of `cache`, or `issue-lock-inactive-days` instead of `issue-inactive-days`.
   - 23 exist only in a newer version of the action than the one the workflow pins.
-- 20 findings were re-checked by hand against the exact `action.yml` at the pinned ref, and all 20 held up.
+- 20 findings were re-checked one at a time against the exact `action.yml` at the pinned ref, and all 20 held up.
 
 The method, numbers and scanner are in [research/actions-inputs-2026-10](research/actions-inputs-2026-10/).
 
