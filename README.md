@@ -1,5 +1,7 @@
 # proof-of-effect
 
+[![tests](https://github.com/awesome-proof-of-effect/proof-of-effect/actions/workflows/tests.yml/badge.svg)](https://github.com/awesome-proof-of-effect/proof-of-effect/actions/workflows/tests.yml)
+
 An agent skill that proves a config change actually changes what the tool does, before anyone calls it a fix.
 
 Coding agents often "fix" things by adding a setting the tool quietly ignores. The key ends up in the wrong place or is misspelled. The option belongs to another version. The flag does not exist. The env var lacks the prefix the bundler needs. Or the action input is one letter off. CI stays green and the diff looks plausible, so nobody notices that nothing changed.
