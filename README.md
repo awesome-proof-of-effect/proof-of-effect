@@ -1,0 +1,67 @@
+# proof-of-effect
+
+An agent skill that proves a config change actually changes what the tool does, before anyone calls it a fix.
+
+Coding agents often "fix" things by adding a setting the tool quietly ignores. The key ends up in the wrong place or is misspelled. The option belongs to another version. The flag does not exist. The env var lacks the prefix the bundler needs. Or the action input is one letter off. CI stays green and the diff looks plausible, so nobody notices that nothing changed.
+
+`proof-of-effect` asks the tool itself. It resolves the config with the base version of each changed file and with the new one, then compares the two. It also checks GitHub Action inputs against the action's metadata, env vars against the code that reads them, and CLI flags against the installed tool's `--help`.
+
+## Example
+
+An agent changed five files to "turn on strict checks and speed up CI":
+
+```text
+| Verdict      | File                     | Setting                                       | Evidence |
+|--------------|--------------------------|-----------------------------------------------|----------|
+| UNKNOWN-KEY  | .github/workflows/ci.yml | jobs.test.steps[0].with.cache-dependency-pat  | actions/setup-node/action.yml@v4 has no input `cache-dependency-pat` (inputs: ..., cache-dependency-path, ...); GitHub only warns "Unexpected input" and runs the step without it |
+| NO-OP        | tsconfig.json            | strict                                        | `tsc --showConfig -p tsconfig.json` shows no change for it; the resolved changes (compilerOptions.noUncheckedIndexedAccess) all come from this file's other edits |
+| NOT-READ     | .env.example             | API_URL                                       | only read in browser code (src/main.ts), but Vite exposes only VITE_-prefixed variables on import.meta.env |
+| PHANTOM-FLAG | package.json             | tsc --strictNullCheck                         | `tsc --all` (Version 5.6.3) does not list --strictNullCheck (in scripts.typecheck) |
+| EFFECTIVE    | tsconfig.json            | compilerOptions.noUncheckedIndexedAccess      | resolved compilerOptions.noUncheckedIndexedAccess: absent → true |
+| EXISTS       | .github/workflows/ci.yml | jobs.test.steps[0].with.cache                 | declared input of actions/setup-node/action.yml@v4 |
+
+4 change(s) do not take effect as written.
+```
+
+All four problems passed CI.
+
+## Install
+
+Copy `skills/proof-of-effect` into your agent's skills folder, for example `~/.claude/skills/proof-of-effect` for Claude Code, or the equivalent folder for Codex, Kiro or any agent that reads `SKILL.md` skills. The agent loads it when it edits configuration.
+
+The checker also works on its own:
+
+```bash
+python3 skills/proof-of-effect/scripts/poe.py check                     # working tree vs HEAD
+python3 skills/proof-of-effect/scripts/poe.py check --base origin/main  # a whole branch
+python3 skills/proof-of-effect/scripts/poe.py probe --files app.yaml -- python -m app --print-config
+```
+
+It needs Python 3.9+ and git and has no other dependencies. PyYAML enables the workflow checks. Exit code 1 means a change does not take effect, so it can also run in CI.
+
+## What it checks
+
+- **Resolved config, before and after:** tsc, ESLint, Jest, Ruff, pytest, and Docker Compose (experimental).
+- **GitHub Actions:** `with:` inputs against `action.yml` or a reusable workflow's inputs.
+- **Env vars:** whether anything reads the variable, and the Vite, Next.js and CRA browser-prefix rules.
+- **CLI flags:** in package scripts, workflow `run:` lines, Makefiles and shell scripts, against the installed tool's `--help`.
+- **Anything else:** `probe` runs a command of your choice with the base and the changed files and compares its output.
+
+The details and the known gaps are in [skills/proof-of-effect/references/checks.md](skills/proof-of-effect/references/checks.md).
+
+## Safety
+
+For the before run, the changed file is swapped back to its base version for a moment, then restored byte for byte, including mode and mtime. Backups and a recovery manifest are written to `.git/poe/` first. `poe.py restore` undoes an interrupted run, and the next run refuses to start until the files are restored. `--no-swap` skips every step that touches files. The only network call fetches public `action.yml` files, and `--offline` turns it off.
+
+## Development
+
+```bash
+python -m pytest tests          # unit tests; tool tests skip when a tool is missing
+POE_TEST_TOOLPATH=/path/to/node_modules/.bin:/path/to/venv/bin python -m pytest tests
+```
+
+The integration tests run real tsc 5.6.3, ESLint 9.13.0, Jest 29.7.0, Ruff 0.7.1 and pytest 8.3.3.
+
+## License
+
+MIT
