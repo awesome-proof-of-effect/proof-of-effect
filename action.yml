@@ -1,0 +1,83 @@
+name: proof-of-effect
+description: >-
+  Check a pull request's config, CLI-flag and env-var changes against its base and
+  write the verdict table to the job summary. Fails the check when a change does not
+  take effect as written.
+branding:
+  icon: check-circle
+  color: green
+
+inputs:
+  base:
+    description: >-
+      Commit or ref to compare against. Leave empty to compare against the pull
+      request's base branch (origin/$GITHUB_BASE_REF), or the previous commit on a push.
+    required: false
+    default: ""
+  only:
+    description: "Comma-separated checkers to run (tsconfig,eslint,jest,ruff,pytest,compose,gha,env,cli). Empty runs them all."
+    required: false
+    default: ""
+  offline:
+    description: "Do not fetch GitHub Action metadata over the network."
+    required: false
+    default: "false"
+  strict:
+    description: "Also fail on UNCLEAR and UNVERIFIABLE findings, not only hard problems."
+    required: false
+    default: "false"
+  fail-on-problems:
+    description: "Fail the check when a change does not take effect. Set false to report only."
+    required: false
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Check out the pull request with its base
+      uses: actions/checkout@v4
+      with:
+        # Fetch full history so the base commit is present and the before/after
+        # tool runs can read each changed file's base version.
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install PyYAML (enables the workflow and compose checks)
+      shell: bash
+      run: python -m pip install --disable-pip-version-check pyyaml==6.0.2
+
+    - name: Make the base branch available
+      shell: bash
+      env:
+        GITHUB_BASE_REF: ${{ github.base_ref }}
+      run: |
+        set -euo pipefail
+        if [ -n "${GITHUB_BASE_REF}" ]; then
+          git fetch --no-tags --depth=0 origin "+refs/heads/${GITHUB_BASE_REF}:refs/remotes/origin/${GITHUB_BASE_REF}" || \
+            git fetch --no-tags origin "${GITHUB_BASE_REF}" || true
+        fi
+
+    - name: Prove the effect of the changes
+      shell: bash
+      env:
+        GITHUB_BASE_REF: ${{ github.base_ref }}
+        POE_EVENT_BEFORE: ${{ github.event.before }}
+        POE_ACTION_BASE: ${{ inputs.base }}
+        POE_ACTION_FAIL_ON_PROBLEMS: ${{ inputs.fail-on-problems }}
+        POE_ACTION_ARGS: >-
+          ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+          ${{ inputs.offline == 'true' && '--offline' || '' }}
+          ${{ inputs.strict == 'true' && '--strict' || '' }}
+      run: |
+        python "${GITHUB_ACTION_PATH}/skills/proof-of-effect/scripts/poe.py" --version
+        python - <<'PY'
+        import os, sys
+        sys.path.insert(0, os.path.join(os.environ["GITHUB_ACTION_PATH"],
+                                        "skills", "proof-of-effect", "scripts"))
+        from poe.action import main
+        raise SystemExit(main())
+        PY

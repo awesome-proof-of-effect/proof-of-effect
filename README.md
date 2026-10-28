@@ -54,6 +54,35 @@ python3 skills/proof-of-effect/scripts/poe.py probe --files app.yaml -- python -
 
 It needs Python 3.9+ and git and has no other dependencies. PyYAML enables the workflow checks. Exit code 1 means a change does not take effect, so it can also run in CI.
 
+## GitHub Action
+
+Run it on every pull request without an agent. It compares each PR against its base branch and writes the verdict table to the run's job summary; the check fails when a change does not take effect.
+
+```yaml
+# .github/workflows/proof-of-effect.yml
+name: proof-of-effect
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  proof-of-effect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: awesome-proof-of-effect/proof-of-effect@v1
+```
+
+The action checks out the PR and its base with full history, installs PyYAML, and runs the same checker. Inputs (all optional):
+
+| Input | Default | What it does |
+|---|---|---|
+| `base` | the PR's base branch | Commit or ref to compare against. |
+| `only` | all checkers | Comma-separated subset, e.g. `tsconfig,gha`. |
+| `offline` | `false` | Do not fetch GitHub Action metadata over the network. |
+| `strict` | `false` | Also fail on UNCLEAR and UNVERIFIABLE findings. |
+| `fail-on-problems` | `true` | Set `false` to report in the summary without failing the check. |
+
+The table appears under the run's **Summary** tab whether the check passes or fails.
+
 ## What it checks
 
 - **Resolved config, before and after:** tsc, ESLint, Jest, Ruff, pytest, and Docker Compose (experimental).
