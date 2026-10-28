@@ -1,0 +1,16 @@
+name: proof-of-effect
+
+# Run this repository's own action, at the pull request's version, on every PR.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  proof-of-effect:
+    runs-on: ubuntu-latest
+    steps:
+      # A local action (uses: ./) has to be checked out before it can run.
+      - uses: actions/checkout@v4
+      - uses: ./
