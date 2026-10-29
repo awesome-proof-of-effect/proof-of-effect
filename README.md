@@ -8,6 +8,14 @@ Coding agents often "fix" things by adding a setting the tool quietly ignores. T
 
 `proof-of-effect` asks the tool itself. It resolves the config with the base version of each changed file and with the new one, then compares the two. It also checks GitHub Action inputs against the action's metadata, env vars against the code that reads them, and CLI flags against the installed tool's `--help`.
 
+## Demo
+
+A commit that claims to tighten type-checking: one tsconfig key really takes effect, one CLI flag is a typo of a real one and is silently ignored. The checker tells them apart in one run.
+
+![proof-of-effect checking a commit: one EFFECTIVE change and one PHANTOM-FLAG](research/demo/demo.svg)
+
+This picture is generated from real output by [`make_demo.py`](skills/proof-of-effect/scripts/make_demo.py) and a test keeps it in sync, so it is never hand-drawn or out of date.
+
 ## Example
 
 An agent changed five files to "turn on strict checks and speed up CI":
