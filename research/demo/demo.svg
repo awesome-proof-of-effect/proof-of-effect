@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1467" height="212" viewBox="0 0 1467 212" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13">
+  <rect width="1467" height="212" rx="8" fill="#0d1117"/>
+  <text x="16" y="29" fill="#3fb950" xml:space="preserve">$ poe.py check --base HEAD~1</text>
+  <text x="16" y="49" fill="#58a6ff" xml:space="preserve">### Proof of effect vs HEAD~1</text>
+  <text x="16" y="69" fill="#c9d1d9" xml:space="preserve"></text>
+  <text x="16" y="89" fill="#c9d1d9" xml:space="preserve">| Verdict | File | Setting | Evidence |</text>
+  <text x="16" y="109" fill="#c9d1d9" xml:space="preserve">|---|---|---|---|</text>
+  <text x="16" y="129" fill="#c9d1d9" xml:space="preserve">| PHANTOM-FLAG | package.json | `tsc --strictNullCheck` | `tsc --all` (Version 5.6.3) does not list --strictNullCheck (in scripts.typecheck); check the docs for the installed version |</text>
+  <text x="16" y="149" fill="#c9d1d9" xml:space="preserve">| EFFECTIVE | tsconfig.json | `compilerOptions.noUncheckedIndexedAccess` | resolved compilerOptions.noUncheckedIndexedAccess: absent → true |</text>
+  <text x="16" y="169" fill="#c9d1d9" xml:space="preserve"></text>
+  <text x="16" y="189" fill="#c9d1d9" xml:space="preserve">**1 change(s) do not take effect as written.** Fix or revert them, and do not report them as fixes.</text>
+</svg>
