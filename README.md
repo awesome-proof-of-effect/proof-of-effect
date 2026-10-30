@@ -49,7 +49,23 @@ The method, numbers and scanner are in [research/actions-inputs-2026-10](researc
 
 ## Install
 
-Copy `skills/proof-of-effect` into your agent's skills folder, for example `~/.claude/skills/proof-of-effect` for Claude Code, or the equivalent folder for Codex, Kiro or any agent that reads `SKILL.md` skills. The agent loads it when it edits configuration.
+One command copies the skill into every coding agent it detects on your machine (Claude Code, Codex, Kiro, Cursor, Windsurf):
+
+```bash
+python3 skills/proof-of-effect/scripts/install.py
+```
+
+It writes the skill to each agent's skills folder (for example `~/.claude/skills/proof-of-effect`) and skips any agent it does not find. Useful flags:
+
+```bash
+python3 skills/proof-of-effect/scripts/install.py --list        # show which agents it would target
+python3 skills/proof-of-effect/scripts/install.py --agent kiro  # just one agent
+python3 skills/proof-of-effect/scripts/install.py --dest DIR    # any other SKILL.md skills folder
+python3 skills/proof-of-effect/scripts/install.py --dry-run     # show what it would do, copy nothing
+python3 skills/proof-of-effect/scripts/install.py --force       # overwrite an existing copy
+```
+
+It is plain Python, needs nothing beyond the standard library, and never overwrites an existing copy unless you pass `--force`. You can still install by hand: copy `skills/proof-of-effect` into your agent's skills folder yourself. Either way, the agent loads the skill when it edits configuration.
 
 The checker also works on its own:
 
