@@ -116,3 +116,41 @@ def test_pytest_reads_a_different_file(repo):
     _, found = repo.check("--only", "pytest", env=tool_env())
     assert _verdict(found, "pyproject.toml", "tool.pytest.ini_options.addopts") == "NO-OP"
     assert "loads pytest.ini" in found[("pyproject.toml", "tool.pytest.ini_options.addopts")]["evidence"]
+
+
+@pytest.mark.skipif(not have("prettier"), reason="prettier not installed")
+def test_prettier_effective_and_unknown_option(repo):
+    repo.write("src/a.ts", "export const x = 1\n")
+    repo.write(".prettierrc.json", '{"semi": false, "tabWidth": 2}\n')
+    repo.commit()
+    repo.write(".prettierrc.json", '{"semi": false, "tabWidth": 4, "tabWidthh": 8}\n')
+    _, found = repo.check("--only", "prettier", env=tool_env())
+    assert _verdict(found, ".prettierrc.json", "tabWidth") == "EFFECTIVE"
+    assert _verdict(found, ".prettierrc.json", "tabWidthh") == "UNKNOWN-KEY"
+
+
+@pytest.mark.skipif(not have("prettier"), reason="prettier not installed")
+def test_prettier_override_makes_a_key_effective(repo):
+    repo.write("src/a.ts", "export const x = 1\n")
+    repo.write(".prettierrc.json",
+               '{"semi": true, "overrides": [{"files": "*.ts", "options": {"tabWidth": 2}}]}\n')
+    repo.commit()
+    # Changing the *.ts override's tabWidth changes the options Prettier resolves for src/a.ts.
+    repo.write(".prettierrc.json",
+               '{"semi": true, "overrides": [{"files": "*.ts", "options": {"tabWidth": 8}}]}\n')
+    _, found = repo.check("--only", "prettier", env=tool_env())
+    assert _verdict(found, ".prettierrc.json", "overrides[0].options.tabWidth") == "EFFECTIVE"
+
+
+@pytest.mark.skipif(not have("prettier"), reason="prettier not installed")
+def test_prettier_package_json_key_ignored_when_config_file_exists(repo):
+    # Prettier searches upward from the file and uses the first config it finds: the closer
+    # src/.prettierrc.json wins, so the root package.json "prettier" key never applies to src/a.ts.
+    repo.write("src/a.ts", "export const x = 1\n")
+    repo.write("src/.prettierrc.json", '{"semi": false}\n')
+    repo.write("package.json", '{"name": "t", "version": "1.0.0", "prettier": {"tabWidth": 2}}\n')
+    repo.commit()
+    repo.write("package.json", '{"name": "t", "version": "1.0.0", "prettier": {"tabWidth": 8}}\n')
+    _, found = repo.check("--only", "prettier", env=tool_env())
+    assert _verdict(found, "package.json", "prettier.tabWidth") == "NO-OP"
+    assert "src/.prettierrc.json" in found[("package.json", "prettier.tabWidth")]["evidence"]

@@ -9,6 +9,7 @@
 | tsconfig | `tsconfig*.json`, `jsconfig*.json` | `tsc --showConfig -p FILE` | options outside `compilerOptions` (tsc ignores unknown top-level keys), unknown compiler options, a new tsconfig that nothing extends, references or passes with `-p` |
 | eslint | `eslint.config.*`, `.eslintrc*`, `package.json#eslintConfig` | `eslint --print-config SAMPLE` | edits to `.eslintrc*` while ESLint runs in flat-config mode, unknown keys and rules |
 | jest | `jest.config.*`, `package.json#jest` | `jest --showConfig` | unknown options (jest only warns), non-default config files nothing passes with `--config` |
+| prettier | `.prettierrc*`, `prettier.config.*`, `package.json#prettier` | `prettier.resolveConfig(SAMPLE)` via the project's own Prettier | options Prettier does not recognise (it silently ignores them), a `package.json#prettier` key or config file that a closer config overrides for the sample file |
 | ruff | `ruff.toml`, `.ruff.toml`, `pyproject.toml#tool.ruff` | `ruff check --show-settings SAMPLE` | unknown fields, settings that resolve to the same value |
 | pytest | `pytest.ini`, `pyproject.toml#tool.pytest`, `tox.ini#pytest`, `setup.cfg#tool:pytest` | pytest with a plugin that dumps the resolved ini options and stops before collection | unknown ini keys, edits to a file pytest does not load (for example `pyproject.toml` when `pytest.ini` exists) |
 | compose | `compose*.y(a)ml`, `docker-compose*.y(a)ml` | `docker compose config --format json` | properties Compose rejects or ignores. **Experimental: not yet tested against a real Docker install** |

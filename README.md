@@ -109,7 +109,7 @@ The table appears under the run's **Summary** tab whether the check passes or fa
 
 ## What it checks
 
-- **Resolved config, before and after:** tsc, ESLint, Jest, Ruff, pytest, and Docker Compose (experimental).
+- **Resolved config, before and after:** tsc, ESLint, Jest, Prettier, Ruff, pytest, and Docker Compose (experimental).
 - **GitHub Actions:** `with:` inputs against `action.yml` or a reusable workflow's inputs.
 - **Env vars:** whether anything reads the variable, and the Vite, Next.js and CRA browser-prefix rules.
 - **CLI flags:** in package scripts, workflow `run:` lines, Makefiles and shell scripts, against the installed tool's `--help`.
@@ -128,7 +128,7 @@ python -m pytest tests          # unit tests; tool tests skip when a tool is mis
 POE_TEST_TOOLPATH=/path/to/node_modules/.bin:/path/to/venv/bin python -m pytest tests
 ```
 
-The integration tests run real tsc 5.6.3, ESLint 9.13.0, Jest 29.7.0, Ruff 0.7.1 and pytest 8.3.3.
+The integration tests run real tsc 5.6.3, ESLint 9.13.0, Jest 29.7.0, Prettier 3.3.3, Ruff 0.7.1 and pytest 8.3.3.
 
 ## License
 

@@ -10,7 +10,7 @@ from .probe import probe
 from .runner import Context
 
 EXIT_OK, EXIT_PROBLEMS, EXIT_ERROR, EXIT_PENDING = 0, 1, 2, 3
-CHECKERS = ["tsconfig", "eslint", "jest", "ruff", "pytest", "compose", "gha", "env", "cli"]
+CHECKERS = ["tsconfig", "eslint", "jest", "prettier", "ruff", "pytest", "compose", "gha", "env", "cli"]
 
 
 def _parser() -> argparse.ArgumentParser:
