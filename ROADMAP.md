@@ -9,7 +9,7 @@ Work happens top to bottom. Bugs reported in issues and breaking changes in supp
 | 3 | Terminal demo (GIF) in the README | Shows the value in five seconds | done ([demo.svg](research/demo/demo.svg), [generator](skills/proof-of-effect/scripts/make_demo.py)) |
 | 4 | One-command install for Claude Code, Codex, Kiro and other `SKILL.md` agents | Removes setup friction | done ([install.py](skills/proof-of-effect/scripts/install.py)) |
 | 5 | Docker Compose: integration test in CI (runners have Docker) | The compose checker is still marked experimental | todo |
-| 6 | Prettier checker (resolved options per file) | Very common config, often edited by agents | todo |
+| 6 | Prettier checker (resolved options per file) | Very common config, often edited by agents | done ([resolvers.py](skills/proof-of-effect/scripts/poe/resolvers.py), [tests](tests/test_real_tools.py)) |
 | 7 | Next.js and Vite config checkers | The most-edited frontend configs | todo |
 | 8 | Shared base configs: also judge every config that extends a changed base | `tsconfig.base.json` edits in monorepos | todo |
 | 9 | Babel (`BABEL_SHOW_CONFIG_FOR`) and Cargo (unused manifest keys) checkers | More ecosystems | todo |

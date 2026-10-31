@@ -16,6 +16,27 @@ from .structdiff import KeyPath, flatten
 PLUGIN_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_pytest_dump")
 JS_EXTS = (".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs")
 PY_EXTS = (".py", ".pyi")
+# Common file types Prettier formats, so there is a sample to resolve per-file options for.
+PRETTIER_EXTS = JS_EXTS + (".json", ".jsonc", ".json5", ".css", ".scss", ".less",
+                           ".md", ".mdx", ".yaml", ".yml", ".html", ".vue")
+
+# A tiny program run through the project's own Prettier: it prints one JSON object with the
+# options Prettier resolves for a file, the config file it loads, and Prettier's own list of
+# known option names. We derive the package from the resolved `prettier` bin so it works
+# without PATH or NODE_PATH, matching how the other checkers call a project-local tool.
+PRETTIER_PROGRAM = r"""
+const pkg = process.argv[1], file = process.argv[2];
+const p = require(pkg);
+(async () => {
+  const [config, configFile, support] = await Promise.all([
+    p.resolveConfig(file, { editorconfig: false }),
+    p.resolveConfigFile(file),
+    p.getSupportInfo(),
+  ]);
+  const known = (support.options || []).map((o) => o.name);
+  process.stdout.write(JSON.stringify({ config: config || {}, configFile, known }));
+})().catch((e) => { process.stderr.write("prettier: " + (e && e.message || e)); process.exit(3); });
+"""
 
 
 @dataclass
@@ -206,6 +227,102 @@ class Jest(Resolver):
         return f"nothing in the repo mentions {base}: jest only loads it when it is passed with --config"
 
 
+class Prettier(Resolver):
+    name, tool = "prettier", "prettier"
+    # Dedicated config files, plus package.json ("prettier" key) and the shared ignore/editor files.
+    NAME = re.compile(r"^(\.prettierrc"
+                      r"(\.(json|json5|jsonc|yaml|yml|toml|js|cjs|mjs|ts|cts|mts))?"
+                      r"|prettier\.config\.(js|cjs|mjs|ts|cts|mts))$")
+    # Keys a Prettier config may hold that are not formatting options and must not be flagged.
+    STRUCTURAL = {"overrides", "$schema"}
+
+    def claims(self, rel):
+        base = os.path.basename(rel)
+        return bool(self.NAME.match(base)) or base == "package.json"
+
+    def owns(self, rel, path):
+        return os.path.basename(rel) != "package.json" or (bool(path) and path[0] == "prettier")
+
+    def whole_file_ok(self, rel):
+        return os.path.basename(rel) != "package.json"
+
+    def _node_and_pkg(self, ctx, rel):
+        node = ctx.which("node", near=os.path.dirname(rel))
+        prettier = ctx.which("prettier", near=os.path.dirname(rel))
+        if not node or not prettier:
+            return None, None
+        # The prettier bin is <pkg>/bin/prettier.cjs; its package dir holds the importable entry.
+        pkg = os.path.dirname(os.path.dirname(os.path.realpath(prettier)))
+        return node, pkg
+
+    def jobs(self, ctx, rel, changed):
+        node, pkg = self._node_and_pkg(ctx, rel)
+        if not node or not pkg:
+            return [], "prettier not found (install it in the project, or pass --tool prettier=PATH)"
+        sample = self._sample(ctx, rel, changed)
+        if not sample:
+            return [], "no source file Prettier formats to resolve the config for (pass --sample FILE)"
+        return [Job(self, [node, "--eval", PRETTIER_PROGRAM, pkg, sample], ctx.root,
+                    f"prettier resolveConfig {sample}")], None
+
+    def _is_config(self, rel):
+        """A file Prettier treats as config, never as a formatting subject to resolve options for."""
+        base = os.path.basename(rel)
+        return (base == "package.json" or base.startswith(".prettierrc")
+                or base.startswith("prettier.config.") or base in (".editorconfig", ".prettierignore"))
+
+    def _sample(self, ctx, rel, changed):
+        """A real source file to resolve per-file options for, never a config file itself.
+
+        An explicit --sample wins. Otherwise prefer a changed source file (what the PR touches),
+        then any tracked one, ranking JS/TS first so `overrides` targeting them are exercised.
+        """
+        js = set(JS_EXTS)
+
+        def usable(path):
+            return (path.endswith(PRETTIER_EXTS) and not self._is_config(path)
+                    and os.path.isfile(ctx.abspath(path)))
+
+        if ctx.samples:
+            chosen = [s for s in ctx.samples if usable(s)] or list(ctx.samples)
+            return chosen[0] if chosen else None
+
+        def rank(path):
+            return (0 if path.endswith(tuple(js)) else 1, path.count("/"), path)
+
+        pool = [p for p in changed if usable(p)] or [p for p in ctx.files() if usable(p)]
+        return sorted(pool, key=rank)[0] if pool else None
+
+    def parse(self, ctx, job, res):
+        raw = res.text[-4000:]
+        if not res.ok:
+            return Parsed(None, [], error_line(res.text) or f"exit code {res.code}", raw=raw)
+        try:
+            payload = _json(res.out)
+        except ValueError:
+            return Parsed(None, [], f"could not parse the output of `{job.label}`", raw=raw)
+        config = payload.get("config") or {}
+        known = set(payload.get("known") or [])
+        # resolveConfig flattens `overrides` into the per-file options, so every remaining key that
+        # Prettier does not list as an option (and is not structural) is one it will silently ignore.
+        unknown = [k for k in config
+                   if k not in known and k not in self.STRUCTURAL] if known else []
+        config_file = payload.get("configFile")
+        loaded = os.path.relpath(config_file, ctx.root) if config_file else None
+        return Parsed(flatten(config), unknown, None, loaded, raw=raw)
+
+    def explain(self, ctx, rel, pairs):
+        # When a dedicated Prettier config exists, package.json's "prettier" key is ignored.
+        if os.path.basename(rel) != "package.json":
+            return None
+        loaded = next((a.loaded for _, a in pairs if a.loaded), None)
+        if loaded and os.path.basename(loaded) != "package.json":
+            same = all(b.data == a.data for b, a in pairs)
+            if same and not any(a.unknown for _, a in pairs):
+                return Verdict.NO_OP, f"Prettier loads {loaded} and ignores the \"prettier\" key in {rel}"
+        return None
+
+
 def _depth(text: str) -> int:
     return sum(text.count(c) for c in "[{(") - sum(text.count(c) for c in "]})")
 
@@ -341,4 +458,4 @@ class Compose(Resolver):
         return [Job(self, argv, os.path.join(ctx.root, os.path.dirname(rel)), label)], None
 
 
-RESOLVERS: List[Resolver] = [Tsconfig(), Eslint(), Jest(), Ruff(), Pytest(), Compose()]
+RESOLVERS: List[Resolver] = [Tsconfig(), Eslint(), Jest(), Prettier(), Ruff(), Pytest(), Compose()]

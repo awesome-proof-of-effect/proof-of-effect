@@ -1,6 +1,6 @@
 ---
 name: proof-of-effect
-description: Prove that a config, CLI-flag or env-var change actually changes what the tool does before calling it a fix. Catches silent no-ops such as keys in the wrong place or misspelled, options the installed version does not have, config files nothing loads, env vars nothing reads (or missing a VITE_/NEXT_PUBLIC_ prefix), GitHub Action inputs that do not exist, and CLI flags the installed tool does not list. Use after editing tsconfig, ESLint, Jest, Ruff, pytest or Docker Compose config, CI workflows, .env files, package.json scripts, Makefiles or shell scripts, and whenever the fix you are about to report is a config change.
+description: Prove that a config, CLI-flag or env-var change actually changes what the tool does before calling it a fix. Catches silent no-ops such as keys in the wrong place or misspelled, options the installed version does not have, config files nothing loads, env vars nothing reads (or missing a VITE_/NEXT_PUBLIC_ prefix), GitHub Action inputs that do not exist, and CLI flags the installed tool does not list. Use after editing tsconfig, ESLint, Jest, Prettier, Ruff, pytest or Docker Compose config, CI workflows, .env files, package.json scripts, Makefiles or shell scripts, and whenever the fix you are about to report is a config change.
 ---
 
 # Proof of effect
@@ -58,7 +58,7 @@ Paste the Markdown table into the PR description or your final message.
 ## Safety
 
 - `check` and `probe` briefly write the base version of one changed file at a time, run the tools, then restore the file byte for byte (mode and mtime too). Backups and a recovery manifest live in `.git/poe/`. If a run is killed, `python3 SKILL_DIR/scripts/poe.py restore` puts everything back, and the next run refuses to start until you do. Stop file watchers and dev servers first, because they may react to the swap. `--no-swap` runs only the static checks.
-- It runs the project's own tools (tsc, eslint, jest, ruff, pytest, docker compose) and reads `--help` only from a fixed list of CLIs. JavaScript configs execute exactly as they do when you lint or test. It never runs package scripts.
+- It runs the project's own tools (tsc, eslint, jest, prettier, ruff, pytest, docker compose) and reads `--help` only from a fixed list of CLIs. JavaScript configs execute exactly as they do when you lint or test. It never runs package scripts.
 - Network use is limited to fetching `action.yml` for GitHub Actions. `--offline` turns it off.
 
 ## Limits
